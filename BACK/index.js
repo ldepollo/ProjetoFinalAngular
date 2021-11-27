@@ -49,7 +49,24 @@ const jwtValidation = (req, res, next) => {
 
 app.use(jwtValidation);
 
-let cards = [];
+let cards = [{
+    "titulo": "InitialCardToDo",
+    "conteudo": "Card inicial na coluna todo",
+    "lista": "todo",
+    "id": "356c0e43-3702-45ed-8cd2-c99e5b3f5529"
+},
+{
+    "titulo": "InitialCardDoing",
+    "conteudo": "Card inicial na coluna doing",
+    "lista": "doing",
+    "id": "26287981-849d-4920-8d65-0d09db528007"
+},
+{
+    "titulo": "InitialCardDone",
+    "conteudo": "Card inicial na coluna done",
+    "lista": "done",
+    "id": "d60d1603-94f0-4569-a5b1-3e3ca4cdaf81"
+}];
 
 app.get('/cards', (req, res) => {
 

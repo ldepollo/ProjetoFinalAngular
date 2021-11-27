@@ -1,0 +1,21 @@
+<div class="card text-center mb-3">
+  <div class="card-header d-flex justify-content-between">
+    <div *ngIf="!editMode" class="cardTitle w-75">{{cardTitle}}</div>
+    <input *ngIf="editMode" type="text" class="cardTitle w-100" value="{{cardTitle}}"
+      (input)="getEditedTitleText($event)" (keypress)="onKeypressEvent($event)">
+    <i *ngIf="!editMode" class="bi bi-pencil-square flex-shrink-1" (click)="toggleEditMode()"></i>
+  </div>
+
+  <div *ngIf="!editMode" class="card-body">{{cardContent}}</div>
+  <textarea *ngIf="editMode" class="cardTitle" value="{{cardContent}}" (input)="getEditedContentText($event)"
+    (keypress)="onKeypressEvent($event)"></textarea>
+
+  <div class="card-footer d-flex justify-content-between">
+    <i *ngIf="!editMode" class="bi bi-arrow-left-circle" (click)="moveCardToLeftColumn()"></i>
+    <i *ngIf="!editMode" class="bi bi-trash" (click)="deleteCard()"></i>
+    <i *ngIf="!editMode" class="bi bi-arrow-right-circle" (click)="moveCardToRightColumn()"></i>
+    <i *ngIf="editMode" class="bi bi-x-circle" (click)="toggleEditMode()"></i>
+    <i *ngIf="editMode" class="bi bi-save" (click)="saveEditChanges()"></i>
+  </div>
+
+</div>
