@@ -1,53 +1,30 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Card } from './models/card.model';
+import { Card } from '../models/card.model';
 
 @Injectable()
 export class HttpService {
 
   apiUrl = 'http://localhost:5000/cards';
-  authToken!: string;
+  authToken: string | null = localStorage.getItem('token');
+
+  options = new HttpHeaders().set('Content-type', 'application/json').set('Authorization', `Bearer ${this.authToken}`);
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getAuthToken(): Observable<string> {
-    let user = { "login": "letscode", "senha": "lets@123" };
-    let header = { 'Content-type': 'application/json' }
-    return this.http.post<string>(`http://localhost:5000/login`, user, { headers: header })
-  }
-
   fetchCardsFromApi(): Observable<Card[]> {
-    const options = {
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${this.authToken}`
-      }
-    };
-    return this.http.get<Card[]>(this.apiUrl, options).pipe(catchError(this.handleError));
+    return this.http.get<Card[]>(this.apiUrl, { headers: this.options }).pipe(catchError(this.handleError));
   }
 
   removeCard(cardId: any): Observable<Card[]> {
-    const options = {
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${this.authToken}`
-      }
-    };
-
-    return this.http.delete<Card[]>(`${this.apiUrl}/${cardId}`, options).pipe(catchError(this.handleError));
+    return this.http.delete<Card[]>(`${this.apiUrl}/${cardId}`, { headers: this.options }).pipe(catchError(this.handleError));
   }
 
   updateCard(updatedCard: Card): Observable<Card[]> {
-    const options = {
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${this.authToken}`
-      }
-    };
-    return this.http.put<Card[]>(`${this.apiUrl}/${updatedCard.id}`, updatedCard, options).pipe(catchError(this.handleError));
+    return this.http.put<Card[]>(`${this.apiUrl}/${updatedCard.id}`, updatedCard, { headers: this.options }).pipe(catchError(this.handleError));
   }
 
   createCard(): Observable<Card[]> {
@@ -57,14 +34,7 @@ export class HttpService {
       lista: 'todo'
     };
 
-    const options = {
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${this.authToken}`
-      }
-    };
-
-    return this.http.post<Card[]>(this.apiUrl, newCard, options).pipe(catchError(this.handleError));
+    return this.http.post<Card[]>(this.apiUrl, newCard, { headers: this.options }).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

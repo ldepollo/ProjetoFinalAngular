@@ -1,0 +1,17 @@
+h3 {
+  color: #2E4C6D;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card-list {
+  min-width: 250px;
+  max-width: 300px;
+
+  background-color: #DADDFC;
+  border-radius: 5px;
+}

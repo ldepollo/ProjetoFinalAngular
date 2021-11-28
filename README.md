@@ -1,150 +1,58 @@
-# Projeto Final - Angular
+# Kanban board
 
-O propósito desse desafio é a criação de frontend para um quadro de kanban. Esse quadro possui listas, que contém cards.
-As imagens abaixo são apenas uma ilustração da funcionalidade desejada:
+## Content
 
-![68747470733a2f2f73332d73612d656173742d312e616d617a6f6e6177732e636f6d2f6c6370692f36326239303530392d383739322d346662312d396161372d3234306635613232633838652e706e67](https://user-images.githubusercontent.com/55414688/141601300-8d164143-2108-4a6a-9457-3c3412a2d902.png)
+<ul>
+<li><a href="## About it">About it</a></li>
+<li><a href="## Setting up">Setting Up</a></li>
+<li><a href="## Loging in">Logging In</a></li>
+<li><a href="## Kanban board">Kanban board</a></li>
+</ul>
+<hr>
 
-Com os dois primeiros cards em modo de edição:
+## About it
 
-![68747470733a2f2f73332d73612d656173742d312e616d617a6f6e6177732e636f6d2f6c6370692f36343837353936382d623033632d343962372d396332382d3464383262373365376435312e706e67](https://user-images.githubusercontent.com/55414688/141601343-8f7c2d25-6abe-4e22-b4b7-1e44e9f9fcb5.png)
+Project of a Kanban board created using Angular 13 and Bootstrap 5.
 
-Esse é um protótipo simples, sem estilo, o uso de uma biblioteca de CSS é **obrigatório**.
+![site-image](images/readme-image.png)
 
-### Rodando a API
+<hr>
 
-Uma API de exemplo foi disponibilizada na pasta BACK
+## Setting up
 
-Para rodá-la, faça:
+This project is using an API to validate an token using JWT and to store and manage the cards.
+
+Follow this steps to set it up:
 ```
 > cd BACK
 > npm install
 > npm run server
 ```
+The server will be running on the port 5000.
 
-Ela responderá na porta 5000.
-
-### Desafio
-
-Você precisa criar um frontend de acordo com os requisitos abaixo, que deve ser desenvolvido na pasta "FRONT".
-
-#### Requisitos
-
-A API nesse projeto utiliza JWT para autenticação, você deve fazer a seguinte requisição antes qualquer outra:
-
+To set up the angular server, follow this steps starting on the root folder (you should already have the Angular CLI installed on you computer):
 ```
-(POST) http://0.0.0.0:5000/login/
-
-{ "login":"letscode", "senha":"lets@123" }
+> cd FRONT
+> npm install
+> ng serve
 ```
+By default, the angular application should be running on the port 4200.
 
-Feita a requisição você receberá um token em formato json. Esse token deve ser enviado em todas as requisições subsequentes pelo header Authorization de acordo com o padrão JWT.
+<hr>
 
-`Authorization: 'Bearer <token>'`
+## Loging in
 
-Lembre-se de setar os headers Accept e ContentType para json em todas as requisições...
-
-A API tem os seguintes entrypoints:
-
+This application was designed to start with a login page, to get the JWT Token. A Sign Up feature is not implemented yet, so to get it working, the following credentials must be used:
 ```
-(GET)     http://0.0.0.0:5000/cards/
-(POST)    http://0.0.0.0:5000/cards/
-(PUT)     http://0.0.0.0:5000/cards/{id}
-(DELETE)  http://0.0.0.0:5000/cards/{id}
+login: letscode
+password: lets@123
 ```
+Also, the application does not check if the token is already expired. So if you stay longer than 1 hour using it, you must reload the page to get a new token.
 
-**GET** obtém uma lista de cards.
+<hr>
 
-A API retorna um array com o seguinte formato:
+## Kanban board
 
-```
-[
-  {
-    id: uuid,
-    titulo: string,
-    conteudo: string,
-    lista: string
-  },
-  ...
-]
-```
+There are three columns: Todo, Doing and Done. Three setup cards is already created on the API, but you can click on Create Card to set a new card on the Todo list and edit it as you want.
 
-**POST** adiciona um novo card, passe-o pelo corpo da requisição com o seguinte formato:
-
-```
-{
-  titulo: string,
-  conteudo: string,
-  lista: string
-}
-```
-
-A api retornará o card completo como o id atribuído.
-
-**PUT** altera um card existente, passe o id na URL e o card completo pelo corpo da requisição de acordo com o formato:
-```
-{
-  id: uuid (o mesmo passado na URL),
-  titulo: string,
-  conteudo: string,
-  lista: string
-}
-```
-
-A api retornará o card completo que foi salvo.
-
-**DELETE** remove um card existente, passe o id na URL.
-
-A API retornará a lista dos cards que sobraram (igual ao GET).
-```
-[
-  {
-    id: uuid,
-    titulo: string,
-    conteudo: string,
-    lista: string
-  }
-]
-```
-
-**Atenção**: As rotas tem validações e retornos diferentes dependendo do resultado:
-
-POST e PUT retornam 400 se titulo, conteudo ou lista forem avaliados como falsy.
-
-PUT também retorna 400 se o id passado na URL não for igual ao do objeto passado no corpo da requisição.
-
-PUT e DELETE retornam 404 se não encontrarem um card com o id passado na URL.
-
-Todas as rotas retornam 401 se o token não for passado, for inválido, mal-formado ou expirado.
-
-#### Requisitos
-
-1. A API deve ser usada para persistência dos cards (ela trabalha com persistência em memória) e não deve ser alterada.
-
-2. A interface gráfica será apenas uma tela, nela deve haver três colunas chamadas "To do", "Doing" e "Done".
-
-3. Os cards devem ser listados nessas colunas de acordo com o valor do campo `lista` presenta no card. Os valores de `lista` devem ser "ToDo", "Doing" e "Done", respectivamente.
-
-4. Deve haver um local que permita criar um card passando valores para o `titulo` e `conteudo`, deve haver um botão para adicionar o card.
-
-5. Um novo card deve sempre cair na lista "To Do" após persistido na API.
-
-6. O card deverá ter dois modos: Visualização e Edição.
-
-7. No modo de visualização o card terá um cabeçalho com seu título, o conteúdo e 4 botões.
-
-8. Um dos botões do card deverá excluí-lo (persistindo pela API), outro colocá-lo em modo de edição.
-
-9. Os dois outros botões devem mudar o card para a lista anterior (se houver) ou para a lista seguinte (se houver). A decisão de desabilitar, esconder ou apenas não gerar o evento desses botões quando não houver a proxima lista ou a anterior é sua.
-
-10. No modo de edição, o card conterá um input para o `titulo`, um textarea para o `conteudo` e dois botões.
-
-11. No modo de edição, um dos botões cancela a edição, quando pressionado os campos devem ser resetados para o valor atual e voltar o card ao modo de visualização.
-
-12. O outro botão salva o card, persistindo as informações pela API. Também volta ao modo de visualização em seguida.
-
-13. Toda decisão de visual é sua. Apenas utilize uma única tela.
-
-14. O projeto deve ser colocado em um repositório GITHUB ou equivalente, estar público, e conter um readme.md que explique em detalhes qualquer comando ou configuração necessária para fazer o projeto rodar.
-
-15. A entrega será apenas a URL do repositório.
+To edit a card (edit content, delete it or change columns), just click on the icons inside each card.
