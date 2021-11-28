@@ -3,10 +3,10 @@
 ## Content
 
 <ul>
-<li><a href="## About it">About it</a></li>
-<li><a href="## Setting up">Setting Up</a></li>
-<li><a href="## Loging in">Logging In</a></li>
-<li><a href="## Kanban board">Kanban board</a></li>
+<li><a href="#about-it">About it</a></li>
+<li><a href="#setting-up">Setting Up</a></li>
+<li><a href="#loging-in">Logging In</a></li>
+<li><a href="#kanban-board-1">Kanban board</a></li>
 </ul>
 <hr>
 
