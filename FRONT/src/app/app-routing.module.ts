@@ -8,7 +8,8 @@ import { AuthGuard } from "./services/auth-guard.service";
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'kanban', canActivate: [AuthGuard], component: KanbanComponent },
+  { path: 'kanban-board', canActivate: [AuthGuard], component: KanbanComponent },
+  { path: 'not-found', component: ErrorComponent },
   { path: '**', component: ErrorComponent }
 ]
 

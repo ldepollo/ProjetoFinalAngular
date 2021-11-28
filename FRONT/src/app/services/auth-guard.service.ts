@@ -12,7 +12,7 @@ export class AuthGuard {
 
   canActivate(): Promise<boolean> | boolean {
     if (localStorage.getItem('token') === null) {
-      this.router.navigate(['/']);
+      this.router.navigate(['not-found']);
     }
     return true
   }

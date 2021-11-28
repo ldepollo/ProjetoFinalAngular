@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
             console.log('não consegui pegar o token');
           } else {
             localStorage.setItem('token', token);
-            this.router.navigateByUrl('kanban');
+            this.router.navigateByUrl('kanban-board');
           }
         });
     } else {

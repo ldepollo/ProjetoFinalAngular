@@ -7,7 +7,6 @@ import { catchError, Observable, throwError } from 'rxjs';
 })
 export class AuthService implements OnInit {
 
-  user = { "login": "letscode", "senha": "lets@123" };
   header = new HttpHeaders().set('Content-type', 'application/json');
 
   constructor(
