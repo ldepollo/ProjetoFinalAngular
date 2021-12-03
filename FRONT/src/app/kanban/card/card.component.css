@@ -1,0 +1,12 @@
+i {
+  cursor: pointer;
+}
+
+textarea {
+  margin: 0.5rem;
+}
+
+.card-header {
+  background-color: white;
+  font-weight: bold;
+}

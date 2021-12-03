@@ -1,0 +1,21 @@
+body {
+  background-color: #2E4C6D;
+}
+
+.btn-custom {
+  background-color: #396EB0;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-custom:hover {
+  background-color: #2b578b;
+  color: white;
+}
+
+/*
+background #2E4C6D
+buttons #396EB0
+interface #DADDFC
+#FC997C
+*/
